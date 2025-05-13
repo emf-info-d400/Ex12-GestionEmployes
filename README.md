@@ -221,6 +221,7 @@ class Entreprise {
     +MAX_TIMBRAGES int$
     -nbreTimbrages int
     -Employe[] employes
+    -Timbrage[] timbrages
     +Entreprise()
     +ajouteEmploye(Employe employe) boolean
     +supprimeEmploye(Employe employe) boolean
@@ -283,6 +284,7 @@ ServiceEmploye o--> "1" Controller : -refService
 ServiceEmploye o--> "1" Entreprise : -entreprise
 Controller o--> "1" Employe : -employeCourant
 Entreprise o--> "0..*" Employe : -employes
+Entreprise o--> "0..*" Timbrage : -timbrages
 Timbrage o--> "1" Employe : -employe
 PeriodeDeTravail o--> "1" Timbrage : -debutPeriode
 PeriodeDeTravail o--> "1" Timbrage : -finPeriode
