@@ -1,7 +1,10 @@
 # Exercice 12 : Gestion des employés
 ## Durée : 240'
 ## Objectifs visés :
-Maîtrise de MVC ; Maitriser les diagrammes de séquence ; Maitriser les diagrammes de classes ; Savoir se référer à la Javadoc.
+- Maîtrise de MVC
+- Maitriser les diagrammes de séquence
+- Maitriser les diagrammes de classes
+- Savoir se référer à la Javadoc.
 
 ## Travail à réaliser
 Lisez avec attention les informations fournies ci-après sous diverses formes (diagramme de classe, javadoc, diagrammes de séquence, …) car vous y trouverez toutes les informations utiles afin de finaliser le projet Java « **GestionEmployes** ».
@@ -92,7 +95,7 @@ HARONI Mac
 classDiagram
 
 class Application {
-    main(String[] args) void$    
+    +main(String[] args) void$    
 }
 
 class ServiceEmploye {
@@ -120,7 +123,7 @@ class Controller {
     +start() void
     +viewExiting() void
     +nouvelEmployeCourant(Employe employe) void
-    +employeEngager(String nom, String prenom)
+    +employeEngager(String nom, String prenom) void
     +employeLicencier() void
     +employeEnVacances() void
     +employeAuTravail() void
@@ -138,10 +141,6 @@ class Controller {
 class View {
     -Controller refController
     +View()
-    -viewExiting() void
-    -initComponents() void
-    -activerBoutons() void
-    -insererTexteDansRapport(String texte) void
     +viewStart() void
     +afficherEmployes(Employe[] employes) void
     +debutNouveauRapport(String texte) void
@@ -151,7 +150,11 @@ class View {
     +messageErreur(String message) void
     +messageQuestion(String message) boolean
     +getRefCtrl() Controller
-    +setRefCtrl(Controller ctrl)
+    +setRefCtrl(Controller ctrl) void
+    -viewExiting() void
+    -initComponents() void
+    -activerBoutons() void
+    -insererTexteDansRapport(String texte) void
     -jButtonQuitterActionPerformed(java.awt.event.ActionEvent event) void
     -jButtonEngagerActionPerformed(java.awt.event.ActionEvent event) void
     -jButtonLicencierActionPerformed(java.awt.event.ActionEvent event) void
@@ -201,7 +204,7 @@ class Controller {
     +start() void
     +viewExiting() void
     +nouvelEmployeCourant(Employe employe) void
-    +employeEngager(String nom, String prenom)
+    +employeEngager(String nom, String prenom) void
     +employeLicencier() void
     +employeEnVacances() void
     +employeAuTravail() void
@@ -262,10 +265,10 @@ class Timbrage {
     -Employe employe
     +Timbrage(Employe employe, Date quand, boolean debutDuTravail)
     +Timbrage(Employe employe, boolean debutDuTravail)
+    +toString() String
     +getEmploye() Employe
     +getQuand() Date
     +isDebutDuTravail() boolean
-    +toString() String
 }
 
 class PeriodeDeTravail {
@@ -273,10 +276,10 @@ class PeriodeDeTravail {
     -Timbrage finPeriode
     +PeriodeDeTravail(Timbrage debutPeriode)
     +PeriodeDeTravail(Timbrage debutPeriode, Timbrage finPeriode)
+    +toString() String
     +getDebutPeriode() Timbrage
     +setFinPeriode(Timbrage finPeriode) void
     +calculerDureeEnSecondes() long
-    +toString() String
 }
 
 Controller o--> "1" ServiceEmploye : -refController
@@ -316,18 +319,18 @@ namespace view {
 Voici le diagramme de séquence de la méthode de la méthode `main()` de la classe `Application` du package `app` :
 ```mermaid
 sequenceDiagram
-    participant app.Application.main()
+    participant app.Application.main
     create participant refCtrl
-    app.Application.main()->>refCtrl: new Controller()
+    app.Application.main->>refCtrl: new Controller()
     create participant refServiceEmploye
-    app.Application.main()->>refServiceEmploye: new ServiceEmploye()
-    app.Application.main()->>refCtrl: setRefServiceEmploye(refServiceEmploye)
+    app.Application.main->>refServiceEmploye: new ServiceEmploye()
+    app.Application.main->>refCtrl: setRefServiceEmploye(refServiceEmploye)
     create participant refView
-    app.Application.main()->>refView: new View()
-    app.Application.main()->>refCtrl: setRefView(refView)
-    app.Application.main()->>refView: setRefCtrl(refCtrl)
-    app.Application.main()->>refServiceEmploye: setRefCtrl(refctrl)
-    app.Application.main()->>refCtrl: start()
+    app.Application.main->>refView: new View()
+    app.Application.main->>refCtrl: setRefView(refView)
+    app.Application.main->>refView: setRefCtrl(refCtrl)
+    app.Application.main->>refServiceEmploye: setRefCtrl(refctrl)
+    app.Application.main->>refCtrl: start()
 ```
 ### Javadoc
 La Javadoc se trouve directement dans les classes Java. Il ne vous reste plus qu'à remplacer les commentaires `// VOTRE CODE ICI...`
